@@ -1,5 +1,6 @@
 import { useRef, useState } from "react"
 import { useAuth, AuthProvider } from "../contexts/AuthContext"
+import router from 'next/router'
 import Image from 'next/image'
 import Head from 'next/head'
 
@@ -7,9 +8,13 @@ export default function Signup() {
 	const emailRef = useRef()
 	const passwordRef = useRef()
 	const passwordConfirmRef = useRef()
-	const { signup, updateName } = useAuth()
+	const { signup, currentUser } = useAuth()
 	const [error, setError] = useState('')
 	const [loading, setLoading] = useState(false)
+
+	if (currentUser) {
+		router.push('/dashboard')
+	}
 
 	async function handleSubmit(e) {
 		e.preventDefault()

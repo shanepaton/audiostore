@@ -7,9 +7,13 @@ import Head from 'next/head'
 export default function Login() {
 	const emailRef = useRef()
 	const passwordRef = useRef()
-	const { login } = useAuth()
+	const { login, currentUser } = useAuth()
 	const [error, setError] = useState('')
 	const [loading, setLoading] = useState(false)
+
+	if (currentUser) {
+		router.push('/dashboard')
+	}
 
 	async function handleSubmit(e) {
 		e.preventDefault()
